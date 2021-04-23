@@ -10,6 +10,7 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.post('/',(req,res) => {
 	console.log(req.body.input);
 	const a= req.body.input;
+	const target="0000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF";
 	if(a===undefined){
 		res.send("input field is not present");
 	} 
@@ -20,7 +21,7 @@ app.post('/',(req,res) => {
 		{
 			var temp=a+i;
 			const hash = crypto.createHash('sha256').update(temp).digest('hex');
-			if(hash.substring(0,4)==="0000")
+			if(hash<target)
 			{
 				required_hash=hash;
 				break;
